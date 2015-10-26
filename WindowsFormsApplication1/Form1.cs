@@ -18,6 +18,7 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+            WindowState = FormWindowState.Maximized;
             a = new int[256];
             //            m_Bitmap = (Bitmap)Bitmap.FromFile(@"C:\Users\Guille\Desktop\303.jpg", false);
             //          pictureBox1.Image = m_Bitmap;
@@ -25,7 +26,7 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.IsMdiContainer = true;
         }
 
 
@@ -57,17 +58,18 @@ namespace WindowsFormsApplication1
             {
                 pictureBox1.Load(openFileDialog1.FileName);
             }*/
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+       /*     OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|Tiff files (*.tiff)|*.tiff";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;
-
-            if (DialogResult.OK == openFileDialog.ShowDialog())
-            {
+            */
+//            if (DialogResult.OK == openFileDialog.ShowDialog())
+//            {
                 // Create a new bitmap.
-                m_Bitmap = (Bitmap)Bitmap.FromFile(openFileDialog.FileName, false);
+                m_Bitmap = (Bitmap)Bitmap.FromFile(@"C:\Users\Guille\Desktop\a.jpg", false);
+                //m_Bitmap = (Bitmap)Bitmap.FromFile(openFileDialog.FileName, false);
                 Color color = m_Bitmap.GetPixel(15, 15);
                 this.AutoScroll = true;
                 this.AutoScrollMinSize = new Size((int)(m_Bitmap.Width * Zoom), (int)(m_Bitmap.Height * Zoom));
@@ -86,7 +88,7 @@ namespace WindowsFormsApplication1
                         //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
                         //aux++;
                     }
-                }
+  //              }
 
  //               textRGB.Text = a.ToString();
 
@@ -123,6 +125,23 @@ namespace WindowsFormsApplication1
 
         private void histogramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Application.OpenForms["Form2"] as Form2 !=null)
+            {
+                //error
+                MessageBox.Show("Error: Histogram is already open");
+            }
+            else
+            {
+                //open
+                 Form2 frm2 = new Form2(a);
+
+                
+                 frm2.MdiParent = this;
+                 frm2.Show();
+                
+
+            }
+            /*
             Form2 newMDIChild = new Form2(a);
             // Set the Parent Form of the Child window.
             //newMDIChild.MdiParent = this;
@@ -131,7 +150,7 @@ namespace WindowsFormsApplication1
 
 //            for (int i = 0; i < 150; i++)
   //            Form2.chart1.Series[0].Points.AddXY(i, a[i]);
-
+  */
         }
 
         private void escalaDeGrisesToolStripMenuItem_Click(object sender, EventArgs e)
