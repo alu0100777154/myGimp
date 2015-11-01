@@ -10,19 +10,23 @@ using System.Windows.Forms;
 
 namespace myGimp
 {
-    public partial class Form2 : Form
+    public partial class Form3 : Form
     {
         int[] b;
-        public Form2(int[] a)
+        int aux=0;
+        public Form3(int[] a)
         {
             InitializeComponent();
             b = a;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void Form3_Load(object sender, EventArgs e)
         {
-            for(int i = 0; i < b.Length; i++)
-                chart1.Series[0].Points.AddXY(i, b[i]);
+            for (int i = 0; i < b.Length; i++)
+            {
+                chart1.Series[0].Points.AddXY(i, b[i]+aux);
+                aux = aux + b[i];
+            }
         }
     }
 }
