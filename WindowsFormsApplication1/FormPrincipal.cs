@@ -10,37 +10,37 @@ using System.Windows.Forms;
 
 namespace myGimp
 {
-    public partial class Form1 : Form
+    public partial class FormPrincipal : Form
     {
-        private System.Drawing.Bitmap m_Bitmap, a_Bitmap;
+        public int lastid=0, activeid;
         // private double Zoom = 1.0;
+        public List<FormImagen> Imagenes;
         int[] a;
-        int pixels = 0, aux = 0, auxi = 0;
-        
+     //   int pixels = 0, aux = 0, auxi = 0;
         float contraste, brillo;
-        Color[] copia;
-        public Form1()
+        //Color[] copia;
+        public FormPrincipal()
         {
             InitializeComponent();
             WindowState = FormWindowState.Maximized;
             a = new int[256];
-            //            m_Bitmap = (Bitmap)Bitmap.FromFile(@"C:\Users\Guille\Desktop\303.jpg", false);
-            //          pictureBox1.Image = m_Bitmap;
+            Imagenes = new List<FormImagen>();
+
+            FormImagen image = new FormImagen(@"C:\Users\Guille\Desktop\Guille.jpg", lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
+
+                        
+                      
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Text= "myGimp";
             this.IsMdiContainer = true;
         }
-
-
-        private void clearButton_Click(object sender, EventArgs e)
-        {
-            // Clear the picture.
-        //    pictureBox1.Image = null;
-            //this.Close();
-        }
-        
 
         private void cargarImagenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -59,40 +59,17 @@ namespace myGimp
 
             if (DialogResult.OK == openFileDialog.ShowDialog())
             {
-                // Create a new bitmap.
-                // m_Bitmap = (Bitmap)Bitmap.FromFile(@"C:\Users\Guille\Desktop\a.jpg", false);
-                m_Bitmap = (Bitmap)Bitmap.FromFile(openFileDialog.FileName, false);
-                //            Color color = m_Bitmap.GetPixel(15, 15);
-                //              this.AutoScroll = true;
-                //              this.AutoScrollMinSize = new Size((int)(m_Bitmap.Width * Zoom), (int)(m_Bitmap.Height * Zoom));
+        
+                FormImagen image = new FormImagen(openFileDialog.FileName, lastid);
+               
+                Imagenes.Add(image);
 
-                //                int aux = 0;
+                Imagenes[lastid].MdiParent = this;
 
-                for (int i = 0; i < m_Bitmap.Width; i++)
-                {
-                    for (int j = 0; j < m_Bitmap.Height; j++)
-                    {
-
-                        a[m_Bitmap.GetPixel(i, j).B] += 1;
-                        //m_Bitmap.SetPixel(i,j, /*Color.Red*/);
-                        //color = m_Bitmap.GetPixel(i, j);
-                        //m_Bitmap.SetPixel(i, j, Color.FromArgb(color.A, color.G, color.R, color.B));
-                        //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
-                        pixels++;
-                    }
-                }
-                for (int i = 0; i < a.Length; i++)
-                {
-                    brillo = brillo + a[i];
-                }
-                brillo /=a.Length;
-                Form4 image = new Form4(m_Bitmap);
-
-                image.MdiParent = this;
-                image.Show();
+                Imagenes[lastid].Show();
+                lastid++;
                 //MessageBox.Show(brillo.ToString());
                 //               textRGB.Text = a.ToString();
-                image.pictureBox1.Image = m_Bitmap;
                 this.Invalidate();
 
             }
@@ -100,7 +77,7 @@ namespace myGimp
 
         private void histogramaAcumulativoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Form3"] as Form3 != null)
+            if (Application.OpenForms["HistogramaAbs " + activeid] as FormHistogramaAbs != null)
             {
                 //error
                 MessageBox.Show("Error: Histogram is already open");
@@ -108,12 +85,9 @@ namespace myGimp
             else
             {
                 //open
-                Form3 frm3 = new Form3(a);
+                FormHistogramaAbs frm3 = new FormHistogramaAbs(Imagenes[activeid].hist, activeid);
                 frm3.Show();
-
-
             }
-
         }
 
         private void guardarImagenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,7 +101,7 @@ namespace myGimp
 
             if (DialogResult.OK == saveFileDialog.ShowDialog())
             {
-                m_Bitmap.Save(saveFileDialog.FileName);
+                //m_Bitmap.Save(saveFileDialog.FileName);
             }
         }
 
@@ -138,12 +112,13 @@ namespace myGimp
 
         private void borrarImagenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-         //   pictureBox1.Image = null;
+            //image.pictureBox1.Image = vacia;
+            //FormImagen image = new FormImagen(vacia);
         }
 
         private void histogramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Form2"] as Form2 != null)
+            if (Application.OpenForms["Histogrma " + activeid] as FormHistograma != null)
             {
                 //error
                 MessageBox.Show("Error: Histogram is already open");
@@ -151,7 +126,7 @@ namespace myGimp
             else
             {
                 //open
-                Form2 frm2 = new Form2(a);
+                FormHistograma frm2 = new FormHistograma(Imagenes[activeid].hist, activeid);
                 frm2.MdiParent = this;
                 frm2.Show();
 
@@ -161,6 +136,8 @@ namespace myGimp
 
         private void escalaDeGrisesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Bitmap trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Width, Imagenes.Find(x => x.id == activeid).m_Bitmap.Height);
+            Bitmap m_Bitmap = Imagenes.Find(x => x.id == activeid).m_Bitmap;
             for (int i = 0; i < m_Bitmap.Width; i++)
             {
                 for (int j = 0; j < m_Bitmap.Height; j++)
@@ -168,28 +145,36 @@ namespace myGimp
 
                     Color gris = m_Bitmap.GetPixel(i, j);
                     int grey = (gris.R + gris.G + gris.B) / 3;
-                    m_Bitmap.SetPixel(i, j, Color.FromArgb(gris.A, grey, grey, grey));
+                    trans.SetPixel(i, j, Color.FromArgb(gris.A, grey, grey, grey));
                     //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
-                    pixels = pixels + 1;
+                    //pixels = pixels + 1;
                 }
             }
 
             //               textRGB.Text = a.ToString();
-           /* Form4 image = new Form4(m_Bitmap);
-            
-            image.MdiParent = this;
-            image.Show();*/
+
+            FormImagen image = new FormImagen(trans, lastid);
+
+            Imagenes.Add(image);
+
+            Imagenes[lastid].MdiParent = this;
+
+            Imagenes[lastid].Show();
+            lastid++;
+
             //        pictureBox1.Image = m_Bitmap;
             this.Invalidate();
         }
 
         private void rOIToolStripMenuItem_Click(object sender, EventArgs e)
-        {/*
-            ROI = !ROI;
-            if (ROI)
-            {
-                MessageBox.Show("Selecciona el primer pixel");
-            }*/
+        {
+            Imagenes[activeid].ROI = !Imagenes[activeid].ROI;
+            
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Imagenes[activeid].select = !Imagenes[activeid].select; 
         }
        
     }

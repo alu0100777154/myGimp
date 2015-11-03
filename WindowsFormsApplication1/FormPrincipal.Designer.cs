@@ -1,6 +1,6 @@
 ﻿namespace myGimp
 {
-    partial class Form1
+    partial class FormPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -43,6 +43,7 @@
             this.rOIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramaAcumulativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,34 +73,34 @@
             this.cerrarToolStripMenuItem,
             this.borrarImagenToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.fileToolStripMenuItem.Text = "Archivo";
             // 
             // cargarImagenToolStripMenuItem
             // 
             this.cargarImagenToolStripMenuItem.Name = "cargarImagenToolStripMenuItem";
-            this.cargarImagenToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.cargarImagenToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.cargarImagenToolStripMenuItem.Text = "Cargar imagen";
             this.cargarImagenToolStripMenuItem.Click += new System.EventHandler(this.cargarImagenToolStripMenuItem_Click);
             // 
             // guardarImagenToolStripMenuItem
             // 
             this.guardarImagenToolStripMenuItem.Name = "guardarImagenToolStripMenuItem";
-            this.guardarImagenToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.guardarImagenToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.guardarImagenToolStripMenuItem.Text = "Guardar imagen";
             this.guardarImagenToolStripMenuItem.Click += new System.EventHandler(this.guardarImagenToolStripMenuItem_Click);
             // 
             // cerrarToolStripMenuItem
             // 
             this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
-            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
             // borrarImagenToolStripMenuItem
             // 
             this.borrarImagenToolStripMenuItem.Name = "borrarImagenToolStripMenuItem";
-            this.borrarImagenToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.borrarImagenToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.borrarImagenToolStripMenuItem.Text = "Borrar Imagen";
             this.borrarImagenToolStripMenuItem.Click += new System.EventHandler(this.borrarImagenToolStripMenuItem_Click);
             // 
@@ -109,36 +110,37 @@
             this.histogramaToolStripMenuItem,
             this.escalaDeGrisesToolStripMenuItem,
             this.rOIToolStripMenuItem,
-            this.histogramaAcumulativoToolStripMenuItem});
+            this.histogramaAcumulativoToolStripMenuItem,
+            this.infoToolStripMenuItem});
             this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
-            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
+            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.herramientasToolStripMenuItem.Text = "Herramientas";
             // 
             // histogramaToolStripMenuItem
             // 
             this.histogramaToolStripMenuItem.Name = "histogramaToolStripMenuItem";
-            this.histogramaToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.histogramaToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.histogramaToolStripMenuItem.Text = "Histograma";
             this.histogramaToolStripMenuItem.Click += new System.EventHandler(this.histogramaToolStripMenuItem_Click);
             // 
             // escalaDeGrisesToolStripMenuItem
             // 
             this.escalaDeGrisesToolStripMenuItem.Name = "escalaDeGrisesToolStripMenuItem";
-            this.escalaDeGrisesToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.escalaDeGrisesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.escalaDeGrisesToolStripMenuItem.Text = "Escala de grises";
             this.escalaDeGrisesToolStripMenuItem.Click += new System.EventHandler(this.escalaDeGrisesToolStripMenuItem_Click);
             // 
             // rOIToolStripMenuItem
             // 
             this.rOIToolStripMenuItem.Name = "rOIToolStripMenuItem";
-            this.rOIToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.rOIToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.rOIToolStripMenuItem.Text = "ROI";
             this.rOIToolStripMenuItem.Click += new System.EventHandler(this.rOIToolStripMenuItem_Click);
             // 
             // histogramaAcumulativoToolStripMenuItem
             // 
             this.histogramaAcumulativoToolStripMenuItem.Name = "histogramaAcumulativoToolStripMenuItem";
-            this.histogramaAcumulativoToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.histogramaAcumulativoToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.histogramaAcumulativoToolStripMenuItem.Text = "Histograma acumulativo";
             this.histogramaAcumulativoToolStripMenuItem.Click += new System.EventHandler(this.histogramaAcumulativoToolStripMenuItem_Click);
             // 
@@ -147,7 +149,14 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // Form1
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.infoToolStripMenuItem.Text = "Info";
+            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
+            // 
+            // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -155,7 +164,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "FormPrincipal";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -180,6 +189,7 @@
         private System.Windows.Forms.ToolStripMenuItem escalaDeGrisesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rOIToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem histogramaAcumulativoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
     }
 }
 
