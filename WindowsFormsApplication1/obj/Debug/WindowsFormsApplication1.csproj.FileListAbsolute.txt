@@ -6,10 +6,6 @@ C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\W
 C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.Properties.Resources.resources
 C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.exe
 C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.pdb
-C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.Form1.resources
-C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.Form2.resources
-C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.Form3.resources
-C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.Form4.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\bin\Debug\myGimp.exe.config
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.exe
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.pdb
@@ -22,3 +18,9 @@ E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormPrincipal.reso
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormHistograma.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormHistogramaAbs.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormImagen.resources
+C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormPrincipal.resources
+C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormHistograma.resources
+C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormHistogramaAbs.resources
+C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormImagen.resources
+C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormLineal.resources
+C:\Users\Guille\Documents\Visual Studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormInfo.resources

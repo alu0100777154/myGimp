@@ -28,46 +28,135 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textEntropia = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textMinmax = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textContraste = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBrillo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Dock = System.Windows.Forms.DockStyle.Top;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(522, 387);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(880, 387);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // Form2
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(221, 407);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Entropía";
+            // 
+            // textEntropia
+            // 
+            this.textEntropia.Location = new System.Drawing.Point(224, 423);
+            this.textEntropia.Name = "textEntropia";
+            this.textEntropia.Size = new System.Drawing.Size(100, 20);
+            this.textEntropia.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(327, 407);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Min, Max";
+            // 
+            // textMinmax
+            // 
+            this.textMinmax.Location = new System.Drawing.Point(330, 423);
+            this.textMinmax.Name = "textMinmax";
+            this.textMinmax.Size = new System.Drawing.Size(100, 20);
+            this.textMinmax.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(115, 407);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Contraste";
+            // 
+            // textContraste
+            // 
+            this.textContraste.Location = new System.Drawing.Point(118, 423);
+            this.textContraste.Name = "textContraste";
+            this.textContraste.Size = new System.Drawing.Size(100, 20);
+            this.textContraste.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 407);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Brillo";
+            // 
+            // textBrillo
+            // 
+            this.textBrillo.Location = new System.Drawing.Point(12, 423);
+            this.textBrillo.Name = "textBrillo";
+            this.textBrillo.Size = new System.Drawing.Size(100, 20);
+            this.textBrillo.TabIndex = 8;
+            // 
+            // FormHistograma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(522, 387);
+            this.ClientSize = new System.Drawing.Size(880, 461);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textEntropia);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textMinmax);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textContraste);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBrillo);
             this.Controls.Add(this.chart1);
-            this.Name = "Form2";
+            this.Name = "FormHistograma";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textEntropia;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textMinmax;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textContraste;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBrillo;
     }
 }

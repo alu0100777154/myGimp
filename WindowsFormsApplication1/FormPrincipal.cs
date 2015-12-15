@@ -12,12 +12,11 @@ namespace myGimp
 {
     public partial class FormPrincipal : Form
     {
-        public int lastid=0, activeid;
+        public int lastid = 0, activeid;
         // private double Zoom = 1.0;
         public List<FormImagen> Imagenes;
         int[] a;
-     //   int pixels = 0, aux = 0, auxi = 0;
-        float contraste, brillo;
+        //   int pixels = 0, aux = 0, auxi = 0;
         //Color[] copia;
         public FormPrincipal()
         {
@@ -26,19 +25,16 @@ namespace myGimp
             a = new int[256];
             Imagenes = new List<FormImagen>();
 
-            FormImagen image = new FormImagen(@"C:\Users\Guille\Desktop\Guille.jpg", lastid);
+/*            FormImagen image = new FormImagen(@"C:\Users\Guille\Desktop\a.jpg", lastid);
             Imagenes.Add(image);
             Imagenes[lastid].MdiParent = this;
             Imagenes[lastid].Show();
-            lastid++;
-
-                        
-                      
+            lastid++;*/
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Text= "myGimp";
+            this.Text = "myGimp";
             this.IsMdiContainer = true;
         }
 
@@ -59,20 +55,31 @@ namespace myGimp
 
             if (DialogResult.OK == openFileDialog.ShowDialog())
             {
-        
                 FormImagen image = new FormImagen(openFileDialog.FileName, lastid);
-               
                 Imagenes.Add(image);
-
                 Imagenes[lastid].MdiParent = this;
-
                 Imagenes[lastid].Show();
                 lastid++;
-                //MessageBox.Show(brillo.ToString());
-                //               textRGB.Text = a.ToString();
                 this.Invalidate();
+            }
+        }
+
+        private void histogramaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Histograma " + activeid] as FormHistograma != null)
+            {
+                //error
+                MessageBox.Show("Error: Histogram is already open");
+            }
+            else
+            {
+                //open
+                FormHistograma frm2 = new FormHistograma(Imagenes[activeid].hist, activeid, Imagenes[activeid].brillo, Imagenes[activeid].contraste, Imagenes[activeid].entropia, Imagenes[activeid].min, Imagenes[activeid].max);
+                frm2.MdiParent = this;
+                frm2.Show();
 
             }
+
         }
 
         private void histogramaAcumulativoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,6 +93,7 @@ namespace myGimp
             {
                 //open
                 FormHistogramaAbs frm3 = new FormHistogramaAbs(Imagenes[activeid].hist, activeid);
+                frm3.MdiParent = this;
                 frm3.Show();
             }
         }
@@ -115,24 +123,7 @@ namespace myGimp
             //image.pictureBox1.Image = vacia;
             //FormImagen image = new FormImagen(vacia);
         }
-
-        private void histogramaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Application.OpenForms["Histogrma " + activeid] as FormHistograma != null)
-            {
-                //error
-                MessageBox.Show("Error: Histogram is already open");
-            }
-            else
-            {
-                //open
-                FormHistograma frm2 = new FormHistograma(Imagenes[activeid].hist, activeid);
-                frm2.MdiParent = this;
-                frm2.Show();
-
-            }
-          
-        }
+     
 
         private void escalaDeGrisesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -142,7 +133,6 @@ namespace myGimp
             {
                 for (int j = 0; j < m_Bitmap.Height; j++)
                 {
-
                     Color gris = m_Bitmap.GetPixel(i, j);
                     int grey = (gris.R + gris.G + gris.B) / 3;
                     trans.SetPixel(i, j, Color.FromArgb(gris.A, grey, grey, grey));
@@ -150,18 +140,11 @@ namespace myGimp
                     //pixels = pixels + 1;
                 }
             }
-
-            //               textRGB.Text = a.ToString();
-
             FormImagen image = new FormImagen(trans, lastid);
-
             Imagenes.Add(image);
-
             Imagenes[lastid].MdiParent = this;
-
             Imagenes[lastid].Show();
             lastid++;
-
             //        pictureBox1.Image = m_Bitmap;
             this.Invalidate();
         }
@@ -169,13 +152,20 @@ namespace myGimp
         private void rOIToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Imagenes[activeid].ROI = !Imagenes[activeid].ROI;
-            
+
+        }
+
+        private void linealToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormLineal frm = new FormLineal(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, activeid, Imagenes[activeid].Height, Imagenes[activeid].Width);
+            frm.MdiParent = this;
+            frm.Show();
         }
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Imagenes[activeid].select = !Imagenes[activeid].select; 
+            Imagenes[activeid].select = !Imagenes[activeid].select;
         }
-       
+
     }
 }
