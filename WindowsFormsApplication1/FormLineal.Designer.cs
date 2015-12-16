@@ -93,6 +93,7 @@
             this.yAxis2.Name = "yAxis2";
             this.yAxis2.Size = new System.Drawing.Size(100, 20);
             this.yAxis2.TabIndex = 6;
+            this.yAxis2.TextChanged += new System.EventHandler(this.yAxis2_TextChanged);
             // 
             // label1
             // 
@@ -129,6 +130,7 @@
             this.label4.Size = new System.Drawing.Size(18, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "y2";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -169,7 +171,6 @@
             this.Controls.Add(this.xAxis1);
             this.Name = "FormLineal";
             this.Text = "FormLineal";
-            this.Load += new System.EventHandler(this.FormLineal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

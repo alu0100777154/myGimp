@@ -25,11 +25,11 @@ namespace myGimp
             a = new int[256];
             Imagenes = new List<FormImagen>();
 
-/*            FormImagen image = new FormImagen(@"C:\Users\Guille\Desktop\a.jpg", lastid);
-            Imagenes.Add(image);
-            Imagenes[lastid].MdiParent = this;
-            Imagenes[lastid].Show();
-            lastid++;*/
+            /*            FormImagen image = new FormImagen(@"C:\Users\Guille\Desktop\a.jpg", lastid);
+                        Imagenes.Add(image);
+                        Imagenes[lastid].MdiParent = this;
+                        Imagenes[lastid].Show();
+                        lastid++;*/
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -123,7 +123,7 @@ namespace myGimp
             //image.pictureBox1.Image = vacia;
             //FormImagen image = new FormImagen(vacia);
         }
-     
+
 
         private void escalaDeGrisesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -155,6 +155,11 @@ namespace myGimp
 
         }
 
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Imagenes[activeid].select = !Imagenes[activeid].select;
+        }
+
         private void linealToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormLineal frm = new FormLineal(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, activeid, Imagenes[activeid].Height, Imagenes[activeid].Width);
@@ -162,9 +167,38 @@ namespace myGimp
             frm.Show();
         }
 
-        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void brilloToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Imagenes[activeid].select = !Imagenes[activeid].select;
+            FormBrillo frm = new FormBrillo(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, activeid);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void gammaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGamma frm = new FormGamma(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, activeid);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void ecualizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            int tam = Imagenes[activeid].m_Bitmap.Width * Imagenes[activeid].m_Bitmap.Height;
+//            Imagenes[activeid].
+//            Imagenes[activeid].hist
+            float nume;
+	    	int deno, redondeado;
+            
+            
+            for(int i = 0; i < tam; i++){
+			    nume = (float)(255 * Imagenes[activeid].ahist[i]);
+			    redondeado = (int) (nume / tam);
+                
+                //tabla.add(Math.Max(0, redondeado - 1));
+			    //System.out.println(i + "  " + tabla.get(i));
+		    }
+
         }
 
     }

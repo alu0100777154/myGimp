@@ -19,9 +19,8 @@ namespace myGimp
         public System.Drawing.Bitmap m_Bitmap, a_Bitmap;
         public float contraste = 0, brillo = 0, entropia = 0;
         Color[] copia;
-        int pixels = 0;
         List<int> valores;
-        public int[] hist;
+        public int[] hist, ahist;
         FormPrincipal a;
 
 
@@ -97,6 +96,7 @@ namespace myGimp
         public FormImagen(string FileName, int id)
         {
             this.id = id;
+            int aux = 0;
             InitializeComponent();
             valores = new List<int>();
             m_Bitmap = (Bitmap)Bitmap.FromFile(FileName, false);
@@ -116,6 +116,12 @@ namespace myGimp
                     //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
                     valores.Add(m_Bitmap.GetPixel(i, j).B);
                 }
+            }
+
+            for (int i = 0; i < hist.Count(); i++)
+            {
+                ahist[i] = hist[i] + aux;
+                aux = aux + hist[i];
             }
 
             for (int i = 0; i < hist.Count(); i++) //103
@@ -208,7 +214,7 @@ namespace myGimp
             {
                 n++;
                 min = n;
-            } while (this.hist[n] == 0);
+            } while (this.hist[n] == 0 && n<255);
 
             n = 255;
             do

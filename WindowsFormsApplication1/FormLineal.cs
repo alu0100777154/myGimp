@@ -15,21 +15,15 @@ namespace myGimp
         int[] hist, nhist;
         int[] y;
         int id, height, width, aux;
-        Color color;
         FormPrincipal a;
-
-        private void FormLineal_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        public System.Drawing.Bitmap a_Bitmap, m_Bitmap;
+        bool crear;
         private void checkCrear_CheckedChanged(object sender, EventArgs e)
         {
             crear = !crear;
         }
 
-        public System.Drawing.Bitmap a_Bitmap, m_Bitmap;
-        bool crear;
+        
 
 
         public FormLineal(System.Drawing.Bitmap m_Bitmap, int[] hist, int id, int height, int width)
@@ -80,8 +74,7 @@ namespace myGimp
                     for (int j = 0; j < m_Bitmap.Height; j++)
                     {
                         aux = m_Bitmap.GetPixel(i, j).B;
-                        color = Color.FromArgb(255, y[aux], y[aux], y[aux]);
-                        a_Bitmap.SetPixel(i, j, color);
+                        a_Bitmap.SetPixel(i, j, Color.FromArgb(255, y[aux], y[aux], y[aux]));
                         //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
 
                     }
@@ -97,6 +90,16 @@ namespace myGimp
 
             }
 
+
+        }
+
+        private void yAxis2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
 
         }
     }
