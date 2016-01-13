@@ -52,19 +52,20 @@ namespace myGimp
             float m = (y2 - y1) / dx;
             float b = y1 - (m * x1);
 
-            for (int i = (int)x1; i < x2; i++) y[i] = (int)m * i + (int)b;
+            for (int i = (int)x1; i < x2; i++) y[i] = (int)(m * i + b);
 
-            for (int i = 0; i < y.Count(); i++)
-            {
-                if (y[i] < 0) y[i] = 0;
-                if (y[i] > 255) y[i] = 255;
-            }
 
             eRecta.Text = "m " + m.ToString() + " b " + b.ToString();
 
 
             if (crear)
             {
+
+                for (int i = 0; i < y.Count(); i++)
+                {
+                    if (y[i] < 0) y[i] = 0;
+                    if (y[i] > 255) y[i] = 255;
+                }
 
                 a = (FormPrincipal)MdiParent;
                 a_Bitmap = new Bitmap(m_Bitmap.Width, m_Bitmap.Height);

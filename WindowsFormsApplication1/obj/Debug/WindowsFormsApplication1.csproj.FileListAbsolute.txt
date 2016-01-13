@@ -28,3 +28,6 @@ E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormInfo.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormLineal.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormBrillo.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormGamma.resources
+C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormBrillo.resources
+C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormEcualizar.resources
+C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormGamma.resources

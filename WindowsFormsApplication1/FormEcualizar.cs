@@ -10,46 +10,42 @@ using System.Windows.Forms;
 
 namespace myGimp
 {
-    public partial class FormBrillo : Form
+    public partial class FormEcualizar : Form
     {
-        int[] hist, nhist;
+        int[] hist, nhist,ahist;
         int[] y;
         int id;
         float A, B;
         float vcontraste = 0, vbrillo = 0;
         FormPrincipal a;
         public System.Drawing.Bitmap a_Bitmap, m_Bitmap;
-        public FormBrillo(System.Drawing.Bitmap m_Bitmap, int[] hist, int id)
+        public FormEcualizar(System.Drawing.Bitmap m_Bitmap, int[] hist, int[] ahist, int id)
         {
             InitializeComponent();
             y = new int[255];
             this.hist = hist;
             this.nhist = hist;
+            this.ahist = ahist;
             this.id = id;
             this.m_Bitmap = m_Bitmap;
         }
-
-
         private void btnEnviar_Click(object sender, EventArgs e)
         {
             int tam = m_Bitmap.Width * m_Bitmap.Height;
+            //            Imagenes[activeid].
+            //            Imagenes[activeid].hist
+            float c;
+            int b;
+            int aux;
+            nhist = hist;
 
-            for (int i = 0; i < hist.Count(); i++)
-                vbrillo += hist[i] * i;
 
-            vbrillo /= tam;
-
-            for (int i = 0; i < hist.Count(); i++)
-                vcontraste += hist[i] * (float)Math.Pow(i - vbrillo, 2);
-
-            vcontraste = (float)Math.Sqrt(vcontraste / tam);
-
-            float nbrillo = Int32.Parse(brillo.Text);
-            float ncontraste = Int32.Parse(contraste.Text);
-            int nVal;
-
-            A = ncontraste / vcontraste;
-            B = nbrillo - (A * vbrillo);
+            for (int i = 0; i < 255; i++)
+            {
+                c = (float)(256 * ahist[i]);
+                b = (int)(c / tam);
+                nhist[i] = b - 1;
+            }
 
             a = (FormPrincipal)MdiParent;
             a_Bitmap = new Bitmap(m_Bitmap.Width, m_Bitmap.Height);
@@ -58,22 +54,20 @@ namespace myGimp
             {
                 for (int j = 0; j < m_Bitmap.Height; j++)
                 {
-                    //int nVal = (int)(m_Bitmap.GetPixel(i, j).B + (int)nbrillo);
+                    aux = m_Bitmap.GetPixel(i, j).B;
+                    a_Bitmap.SetPixel(i, j, Color.FromArgb(255, nhist[aux], nhist[aux], nhist[aux]));
+                    //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
 
-                    if (A != 0) nVal = ((int)(m_Bitmap.GetPixel(i, j).B * A + B));
-                    else nVal= m_Bitmap.GetPixel(i, j).B + (int)B;
-                    //red*A+B;
-                    if (nVal < 0) nVal = 0;
-                    if (nVal > 255) nVal = 255;
-
-                    a_Bitmap.SetPixel(i, j, Color.FromArgb(255, nVal, nVal, nVal));
                 }
             }
+
+
             FormImagen subImagen = new FormImagen(a_Bitmap, a.lastid);
             a.Imagenes.Add(subImagen);
             a.Imagenes[a.lastid].MdiParent = this.MdiParent;
             a.Imagenes[a.lastid].Show();
             a.lastid++;
+
         }
     }
 }

@@ -12,86 +12,12 @@ namespace myGimp
 {
     public partial class FormImagen : Form
     {
-        public int id;
+        public int id, nVal;
         public bool ROI = false, select = false;
         bool segundo = false;
         public int cpx, cpy, cx, cy, rectx, recty, min, max;
         public System.Drawing.Bitmap m_Bitmap, a_Bitmap;
-        public float contraste = 0, brillo = 0, entropia = 0;
-        Color[] copia;
-        List<int> valores;
-        public int[] hist, ahist;
-        FormPrincipal a;
 
-
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            if (select)
-            {
-
-                MouseEventArgs me = (MouseEventArgs)e;
-                Point coordinates = me.Location;
-                if (!ROI)
-                {
-                    Color valor = m_Bitmap.GetPixel(coordinates.X, coordinates.Y);
-                    MessageBox.Show(coordinates + " Valor de gris " + valor.G);
-                }
-
-
-                if (ROI)
-                {
-                    if (segundo)
-                    {
-                        int aux = 0, auxi = 0;
-                        int temp;
-                        cx = coordinates.X;
-                        cy = coordinates.Y;
-                        if (cpx > cx) { temp = cpx; cpx = cx; cx = temp; }
-                        if (cpy > cy) { temp = cpy; cpy = cy; cy = temp; }
-                        rectx = cx - cpx;
-                        recty = cy - cpy;
-                        copia = new Color[rectx * recty];
-                        //Size tam = new Size(Math.Abs(cx-cpx),Math.Abs(cy-cpy));
-                        a_Bitmap = new Bitmap(rectx, recty);
-                        for (int i = cpx; i < cx; i++)
-                        {
-                            for (int j = cpy; j < cy; j++)
-                            {
-                                copia[aux] = m_Bitmap.GetPixel(i, j);
-                                aux++;
-                                //                            a_Bitmap.SetPixel(i,j,copia);
-                            }
-                        }
-
-                        for (int i = 0; i < rectx; i++)
-                        {
-                            for (int j = 0; j < recty; j++)
-                            {
-                                a_Bitmap.SetPixel(i, j, copia[auxi]);
-                                auxi++;
-                            }
-                        }
-                        /*FormPrincipal*/
-                        a = (FormPrincipal)MdiParent;
-                        FormImagen subImagen = new FormImagen(a_Bitmap, a.lastid);
-                        a.Imagenes.Add(subImagen);
-                        a.Imagenes[a.lastid].MdiParent = this.MdiParent;
-                        a.Imagenes[a.lastid].Show();
-                        a.lastid++;
-                        segundo = !segundo;
-                    }
-                    else
-                    {
-                        cpx = coordinates.X;
-                        cpy = coordinates.Y;
-                        segundo = !segundo;
-                        MessageBox.Show("Selecciona el segundo pixel");
-                    }
-
-                }
-            }
-        }
 
         public FormImagen(string FileName, int id)
         {
@@ -101,6 +27,8 @@ namespace myGimp
             valores = new List<int>();
             m_Bitmap = (Bitmap)Bitmap.FromFile(FileName, false);
             hist = new int[256];
+            ahist = new int[256];
+            acum = new int[256];
             int tam = m_Bitmap.Width * m_Bitmap.Height;
             pictureBox1.Image = m_Bitmap;
             this.Height = pictureBox1.Image.Height + 40;
@@ -214,7 +142,7 @@ namespace myGimp
             {
                 n++;
                 min = n;
-            } while (this.hist[n] == 0 && n<255);
+            } while (this.hist[n] == 0 && n < 255);
 
             n = 255;
             do
@@ -223,6 +151,133 @@ namespace myGimp
                 n--;
             } while (hist[n] == 0);
         }
+
+
+        private void histogramaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|Tiff files (*.tiff)|*.tiff";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
+            if (DialogResult.OK == openFileDialog.ShowDialog())
+            {
+                FormImagen image = new FormImagen(openFileDialog.FileName,99);
+                for (int i = 0; i < ahist.Count(); i++)
+                    image.ahist[i] = image.ahist[i] / image.m_Bitmap.Width * image.m_Bitmap.Height;
+
+                for (int i = 0; i < acum.Count(); i++)
+                    acum[i] = ahist[i] / this.Width * this.Height;
+
+                for (int i = 0; i < hist.Count(); i++)
+                {
+                    nVal = Math.Min(image.ahist[i],acum[i]);
+                }
+
+                a = (FormPrincipal)MdiParent;
+
+                a_Bitmap = new Bitmap(m_Bitmap.Width, m_Bitmap.Height);
+
+                for (int i = 0; i < m_Bitmap.Width; i++)
+                {
+                    for (int j = 0; j < m_Bitmap.Height; j++)
+                    {
+                        //int nVal = (int)(m_Bitmap.GetPixel(i, j).B + (int)nbrillo);
+
+                        m_Bitmap.SetPixel(i, j, Color.FromArgb(255, nVal, nVal, nVal));
+                    }
+                }
+
+
+                a.Imagenes.Add(image);
+                a.Imagenes[a.lastid].MdiParent = this;
+                a.Imagenes[a.lastid].Show();
+                a.lastid++;
+                this.Invalidate();
+
+
+                this.Invalidate();
+            }
+        }
+
+        public float contraste = 0, brillo = 0, entropia = 0;
+        Color[] copia;
+        List<int> valores;
+        public int[] hist, ahist, acum;
+        FormPrincipal a;
+
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (select)
+            {
+
+                MouseEventArgs me = (MouseEventArgs)e;
+                Point coordinates = me.Location;
+                if (!ROI)
+                {
+                    Color valor = m_Bitmap.GetPixel(coordinates.X, coordinates.Y);
+                    MessageBox.Show(coordinates + " Valor de gris " + valor.G);
+                }
+
+
+                if (ROI)
+                {
+                    if (segundo)
+                    {
+                        int aux = 0, auxi = 0;
+                        int temp;
+                        cx = coordinates.X;
+                        cy = coordinates.Y;
+                        if (cpx > cx) { temp = cpx; cpx = cx; cx = temp; }
+                        if (cpy > cy) { temp = cpy; cpy = cy; cy = temp; }
+                        rectx = cx - cpx;
+                        recty = cy - cpy;
+                        copia = new Color[rectx * recty];
+                        //Size tam = new Size(Math.Abs(cx-cpx),Math.Abs(cy-cpy));
+                        a_Bitmap = new Bitmap(rectx, recty);
+                        for (int i = cpx; i < cx; i++)
+                        {
+                            for (int j = cpy; j < cy; j++)
+                            {
+                                copia[aux] = m_Bitmap.GetPixel(i, j);
+                                aux++;
+                                //                            a_Bitmap.SetPixel(i,j,copia);
+                            }
+                        }
+
+                        for (int i = 0; i < rectx; i++)
+                        {
+                            for (int j = 0; j < recty; j++)
+                            {
+                                a_Bitmap.SetPixel(i, j, copia[auxi]);
+                                auxi++;
+                            }
+                        }
+                        /*FormPrincipal*/
+                        a = (FormPrincipal)MdiParent;
+                        FormImagen subImagen = new FormImagen(a_Bitmap, a.lastid);
+                        a.Imagenes.Add(subImagen);
+                        a.Imagenes[a.lastid].MdiParent = this.MdiParent;
+                        a.Imagenes[a.lastid].Show();
+                        a.lastid++;
+                        segundo = !segundo;
+                    }
+                    else
+                    {
+                        cpx = coordinates.X;
+                        cpy = coordinates.Y;
+                        segundo = !segundo;
+                        MessageBox.Show("Selecciona el segundo pixel");
+                    }
+
+                }
+            }
+        }
+
 
         private void FormImagen_Activated(object sender, EventArgs e)
         {

@@ -54,6 +54,12 @@
     <Compile Include="FormBrillo.Designer.cs">
       <DependentUpon>FormBrillo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEcualizar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEcualizar.Designer.cs">
+      <DependentUpon>FormEcualizar.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGamma.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="System\PaintEventHandler.cs" />
     <EmbeddedResource Include="FormBrillo.resx">
       <DependentUpon>FormBrillo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEcualizar.resx">
+      <DependentUpon>FormEcualizar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGamma.resx">
       <DependentUpon>FormGamma.cs</DependentUpon>

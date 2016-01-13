@@ -183,21 +183,9 @@ namespace myGimp
 
         private void ecualizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            int tam = Imagenes[activeid].m_Bitmap.Width * Imagenes[activeid].m_Bitmap.Height;
-//            Imagenes[activeid].
-//            Imagenes[activeid].hist
-            float nume;
-	    	int deno, redondeado;
-            
-            
-            for(int i = 0; i < tam; i++){
-			    nume = (float)(255 * Imagenes[activeid].ahist[i]);
-			    redondeado = (int) (nume / tam);
-                
-                //tabla.add(Math.Max(0, redondeado - 1));
-			    //System.out.println(i + "  " + tabla.get(i));
-		    }
+            FormEcualizar frm = new FormEcualizar(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, Imagenes[activeid].ahist, activeid);
+            frm.MdiParent = this;
+            frm.Show();
 
         }
 
