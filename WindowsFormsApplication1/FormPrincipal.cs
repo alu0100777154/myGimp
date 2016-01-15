@@ -25,11 +25,11 @@ namespace myGimp
             a = new int[256];
             Imagenes = new List<FormImagen>();
 
-            /*            FormImagen image = new FormImagen(@"C:\Users\Guille\Desktop\a.jpg", lastid);
-                        Imagenes.Add(image);
-                        Imagenes[lastid].MdiParent = this;
-                        Imagenes[lastid].Show();
-                        lastid++;*/
+            FormImagen image = new FormImagen(@"C:\Users\Guille\Desktop\a.jpg", lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace myGimp
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|Tiff files (*.tiff)|*.tiff";
+            openFileDialog.Filter = "*.*|*.*|Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|Tiff files (*.tiff)|*.tiff";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;
 
@@ -188,6 +188,163 @@ namespace myGimp
             frm.Show();
 
         }
+
+        private void espejoVerticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Width, Imagenes.Find(x => x.id == activeid).m_Bitmap.Height);
+            Bitmap m_Bitmap = Imagenes.Find(x => x.id == activeid).m_Bitmap;
+            int height = m_Bitmap.Height - 1;
+            for (int i = 0; i < m_Bitmap.Width; i++)
+            {
+                for (int j = 0; j < m_Bitmap.Height; j++)
+                {
+                    Color aux = m_Bitmap.GetPixel(i, j);
+                    trans.SetPixel(i, height - j, aux);
+                }
+            }
+            FormImagen image = new FormImagen(trans, lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
+            this.Invalidate();
+        }
+
+        private void espejoHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Width, Imagenes.Find(x => x.id == activeid).m_Bitmap.Height);
+            Bitmap m_Bitmap = Imagenes.Find(x => x.id == activeid).m_Bitmap;
+            int width = m_Bitmap.Width - 1;
+            for (int i = 0; i < m_Bitmap.Width; i++)
+            {
+                for (int j = 0; j < m_Bitmap.Height; j++)
+                {
+                    Color aux = m_Bitmap.GetPixel(i, j);
+                    trans.SetPixel(width - i, j, aux);
+                }
+            }
+            FormImagen image = new FormImagen(trans, lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
+            this.Invalidate();
+        }
+
+        private void traspuestaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Width, Imagenes.Find(x => x.id == activeid).m_Bitmap.Height);
+            Bitmap m_Bitmap = Imagenes.Find(x => x.id == activeid).m_Bitmap;
+
+            if (m_Bitmap.Height != m_Bitmap.Width)
+            {
+                trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Height, Imagenes.Find(x => x.id == activeid).m_Bitmap.Width);
+
+                //trans.Height = m_Bitmap.Width;
+                //trans.Width = m_Bitmap.Height;
+            }
+
+            for (int i = 0; i < m_Bitmap.Width; i++)
+            {
+                for (int j = 0; j < m_Bitmap.Height; j++)
+                {
+                    Color aux = m_Bitmap.GetPixel(i, j);
+                    trans.SetPixel(j, i, aux);
+                }
+            }
+            FormImagen image = new FormImagen(trans, lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
+            this.Invalidate();
+        }
+
+        private void rotacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Height, Imagenes.Find(x => x.id == activeid).m_Bitmap.Width)
+                
+                ;
+            Bitmap m_Bitmap = Imagenes.Find(x => x.id == activeid).m_Bitmap;
+
+
+                for (int i = 0; i < m_Bitmap.Width; i++)
+                {
+                    for (int j = 0; j < m_Bitmap.Height; j++)
+                    {
+                        Color aux = m_Bitmap.GetPixel(i, j);
+                       trans.SetPixel(m_Bitmap.Height-j-1, i, aux);
+                }
+            }
+            FormImagen image = new FormImagen(trans, lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
+            this.Invalidate();       
+        
+    }
+
+        private void rotacion180ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Width, Imagenes.Find(x => x.id == activeid).m_Bitmap.Height);
+            Bitmap m_Bitmap = Imagenes.Find(x => x.id == activeid).m_Bitmap;
+
+
+            for (int i = 0; i < m_Bitmap.Width; i++)
+            {
+                for (int j = 0; j < m_Bitmap.Height; j++)
+                {
+                    Color aux = m_Bitmap.GetPixel(i, j);
+                    trans.SetPixel(m_Bitmap.Width - i - 1, m_Bitmap.Height - j - 1, aux);
+                }
+            }
+            FormImagen image = new FormImagen(trans, lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
+            this.Invalidate();
+        }
+
+        private void rotacion270ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap trans = new Bitmap(Imagenes.Find(x => x.id == activeid).m_Bitmap.Height, Imagenes.Find(x => x.id == activeid).m_Bitmap.Width);
+            Bitmap m_Bitmap = Imagenes.Find(x => x.id == activeid).m_Bitmap;
+
+
+            for (int i = 0; i < m_Bitmap.Width; i++)
+            {
+                for (int j = 0; j < m_Bitmap.Height; j++)
+                {
+                    Color aux = m_Bitmap.GetPixel(i, j);
+                    trans.SetPixel(j, m_Bitmap.Width - i - 1, aux);
+                }
+            }
+            FormImagen image = new FormImagen(trans, lastid);
+            Imagenes.Add(image);
+            Imagenes[lastid].MdiParent = this;
+            Imagenes[lastid].Show();
+            lastid++;
+            this.Invalidate();
+        }
+
+       
+
+        private void vecinoToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            Vecino frm = new Vecino(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, activeid);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void bilinealToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bilineal frm = new Bilineal(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, activeid);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
 
     }
 }

@@ -31,3 +31,6 @@ E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormGamma.resource
 C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormBrillo.resources
 C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormEcualizar.resources
 C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.FormGamma.resources
+E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormEcualizar.resources
+E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.Vecino.resources
+E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.Bilineal.resources

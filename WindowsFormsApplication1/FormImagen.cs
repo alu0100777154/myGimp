@@ -29,6 +29,7 @@ namespace myGimp
             hist = new int[256];
             ahist = new int[256];
             acum = new int[256];
+            acumaux = new int[256];
             int tam = m_Bitmap.Width * m_Bitmap.Height;
             pictureBox1.Image = m_Bitmap;
             this.Height = pictureBox1.Image.Height + 40;
@@ -94,8 +95,10 @@ namespace myGimp
         {
             this.id = id;
             InitializeComponent();
+            int aux = 0;
             m_Bitmap = bitmap;
             hist = new int[256];
+            ahist = new int[256];
             pictureBox1.Image = m_Bitmap;
             this.Height = pictureBox1.Image.Height + 40;
             this.Width = pictureBox1.Image.Width + 20;
@@ -112,6 +115,12 @@ namespace myGimp
                     //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
                     valores.Add(m_Bitmap.GetPixel(i, j).B);
                 }
+            }
+            
+            for (int i = 0; i < hist.Count(); i++)
+            {
+                ahist[i] = hist[i] + aux;
+                aux = aux + hist[i];
             }
 
             for (int i = 0; i < hist.Count(); i++) //103
@@ -158,22 +167,67 @@ namespace myGimp
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|Tiff files (*.tiff)|*.tiff";
+            openFileDialog.Filter = "Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|Tiff files (*.tiff)|*.tiff|*.*|*.*";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;
 
             if (DialogResult.OK == openFileDialog.ShowDialog())
             {
-                FormImagen image = new FormImagen(openFileDialog.FileName,99);
-                for (int i = 0; i < ahist.Count(); i++)
-                    image.ahist[i] = image.ahist[i] / image.m_Bitmap.Width * image.m_Bitmap.Height;
+                FormImagen image = new FormImagen(openFileDialog.FileName,99); // ID 99
 
-                for (int i = 0; i < acum.Count(); i++)
-                    acum[i] = ahist[i] / this.Width * this.Height;
+                int aux = 0;
+                for (int i = 0; i < m_Bitmap.Width; i++)
+                {
+                    for (int j = 0; j < m_Bitmap.Height; j++)
+                    {
+                        image.hist[m_Bitmap.GetPixel(i, j).B] += 1;
+                    }
+                }
 
                 for (int i = 0; i < hist.Count(); i++)
                 {
-                    nVal = Math.Min(image.ahist[i],acum[i]);
+                    image.ahist[i] = hist[i] + aux;
+                    aux = aux + hist[i];
+                }
+
+                for (int i = 0; i < ahist.Count(); i++)
+                    acumaux[i] = image.ahist[i] / (image.m_Bitmap.Width * image.m_Bitmap.Height);
+
+                for (int i = 0; i < acum.Count(); i++)
+                    acum[i] = ahist[i] / (this.Width * this.Height);
+
+
+
+                //    	Cálculo de la tabla de transformación
+                int[] tabla = new int[256];
+
+//                Array<int> tabla = new Array<int>(0);
+
+                float lastDife, auxDif;
+                int indice = 0;
+
+
+                for (int i = 0; i < acum.Count(); i++)
+                {
+                    lastDife = 9999;
+                    for (int j = 0; j < acum.Count(); j++)
+                    {
+                        auxDif = Math.Abs(acumaux[j] - acum[i]);
+                        if (auxDif <= lastDife)
+                        {
+                            lastDife = auxDif;
+                            indice = j;
+                        }
+                    }
+                    //System.out.println("i: " + i);
+                    tabla.SetValue(i,indice);
+                }
+
+
+                /*
+                for (int i = 0; i < hist.Count(); i++)
+                {
+                    nVal = Math.Min(acumaux[i],acum[i]);
                 }
 
                 a = (FormPrincipal)MdiParent;
@@ -184,20 +238,86 @@ namespace myGimp
                 {
                     for (int j = 0; j < m_Bitmap.Height; j++)
                     {
-                        //int nVal = (int)(m_Bitmap.GetPixel(i, j).B + (int)nbrillo);
+                        //int nVal = (int)(m_Bitmap.GetPixel(i, j).B + nbrillo);
 
                         m_Bitmap.SetPixel(i, j, Color.FromArgb(255, nVal, nVal, nVal));
+                    }
+                }
+                */
+
+             //   image.m_Bitmap.Width = m_Bitmap.Width;
+
+                a_Bitmap = new Bitmap(m_Bitmap.Width, m_Bitmap.Height);
+
+                for (int i = 0; i < m_Bitmap.Width; i++)
+                {
+                    int valor;
+                    Color colorAux;
+                    for (int j = 0; j < m_Bitmap.Height; j++)
+                    {
+                        //Almacenamos el color del píxel
+                        colorAux = m_Bitmap.GetPixel(i,j);
+
+                        valor = tabla[colorAux.R];
+                        colorAux = Color.FromArgb(255,valor, valor, valor);
+                        //Asignamos el nuevo valor al BufferedImage
+                        a_Bitmap.SetPixel(i, j, Color.FromArgb(255, valor, valor, valor));
+
+
+                    }
+                }
+
+                FormImagen image1 = new FormImagen(a_Bitmap, a.lastid);
+                
+                a.Imagenes.Add(image1);
+                a.Imagenes[a.lastid].MdiParent = this.MdiParent;
+                a.Imagenes[a.lastid].Show();
+                a.lastid++;
+                this.Invalidate();
+
+                
+            }
+        }
+
+        private void diferenciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "*.*|*.*|Bitmap files (*.bmp)|*.bmp|Jpeg files (*.jpg)|*.jpg|Tiff files (*.tiff)|*.tiff";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
+            if (DialogResult.OK == openFileDialog.ShowDialog())
+            {
+                FormImagen image = new FormImagen(openFileDialog.FileName, a.lastid);
+
+
+                for (int i = 0; i < image.m_Bitmap.Width; i++)
+                {
+                    int valor;
+                    for (int j = 0; j < image.m_Bitmap.Height; j++)
+                    {
+                        //Almacenamos el color del píxel
+                        //                        valor= image.m_Bitmap.GetPixel(i, j).A
+                        //                        this.m_Bitmap.GetPixel(i, j).A
+                        valor = Math.Abs(image.m_Bitmap.GetPixel(i, j).B - this.m_Bitmap.GetPixel(i, j).B);
+
+                        if (valor > 0)
+                        {
+
+                            //Asignamos el nuevo valor 
+                            image.m_Bitmap.SetPixel(i, j, Color.FromArgb(Color.Red.A, 255, 0, 0));
+
+                        }
                     }
                 }
 
 
                 a.Imagenes.Add(image);
-                a.Imagenes[a.lastid].MdiParent = this;
+                a.Imagenes[a.lastid].MdiParent = this.MdiParent;
                 a.Imagenes[a.lastid].Show();
                 a.lastid++;
-                this.Invalidate();
-
-
                 this.Invalidate();
             }
         }
@@ -205,7 +325,7 @@ namespace myGimp
         public float contraste = 0, brillo = 0, entropia = 0;
         Color[] copia;
         List<int> valores;
-        public int[] hist, ahist, acum;
+        public int[] hist, ahist, acum, acumaux;
         FormPrincipal a;
 
 
@@ -285,5 +405,7 @@ namespace myGimp
             a.activeid = this.id;
             this.Text = id.ToString();
         }
+
+        
     }
 }

@@ -41,6 +41,10 @@ namespace myGimp
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
+            try
+            {
+
+            
             float x1 = Int32.Parse(xAxis1.Text);
             float x2 = Int32.Parse(xAxis2.Text);
             float y1 = Int32.Parse(yAxis1.Text);
@@ -75,6 +79,7 @@ namespace myGimp
                     for (int j = 0; j < m_Bitmap.Height; j++)
                     {
                         aux = m_Bitmap.GetPixel(i, j).B;
+
                         a_Bitmap.SetPixel(i, j, Color.FromArgb(255, y[aux], y[aux], y[aux]));
                         //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
 
@@ -91,6 +96,11 @@ namespace myGimp
 
             }
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("hola");
+            }
 
         }
 

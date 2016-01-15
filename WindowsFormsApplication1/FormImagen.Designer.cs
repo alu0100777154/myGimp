@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.especificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diferenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -59,9 +60,10 @@
             // especificarToolStripMenuItem
             // 
             this.especificarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.histogramaToolStripMenuItem});
+            this.histogramaToolStripMenuItem,
+            this.diferenciaToolStripMenuItem});
             this.especificarToolStripMenuItem.Name = "especificarToolStripMenuItem";
-            this.especificarToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.especificarToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.especificarToolStripMenuItem.Text = "Especificar";
             // 
             // histogramaToolStripMenuItem
@@ -70,6 +72,13 @@
             this.histogramaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.histogramaToolStripMenuItem.Text = "Histograma";
             this.histogramaToolStripMenuItem.Click += new System.EventHandler(this.histogramaToolStripMenuItem_Click);
+            // 
+            // diferenciaToolStripMenuItem
+            // 
+            this.diferenciaToolStripMenuItem.Name = "diferenciaToolStripMenuItem";
+            this.diferenciaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.diferenciaToolStripMenuItem.Text = "Diferencia";
+            this.diferenciaToolStripMenuItem.Click += new System.EventHandler(this.diferenciaToolStripMenuItem_Click);
             // 
             // FormImagen
             // 
@@ -96,5 +105,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem especificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem histogramaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diferenciaToolStripMenuItem;
     }
 }
