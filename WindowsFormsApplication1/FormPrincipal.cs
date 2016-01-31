@@ -109,7 +109,7 @@ namespace myGimp
 
             if (DialogResult.OK == saveFileDialog.ShowDialog())
             {
-                //m_Bitmap.Save(saveFileDialog.FileName);
+               //  m_Bitmap.Save(saveFileDialog.FileName);
             }
         }
 

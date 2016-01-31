@@ -32,7 +32,7 @@ namespace myGimp
         {
             int tam = m_Bitmap.Width * m_Bitmap.Height;
 
-            float gamma_ = Int32.Parse(gamma.Text); 
+            float gamma_ = (float)Int32.Parse(gamma.Text); 
 
             a = (FormPrincipal)MdiParent;
             a_Bitmap = new Bitmap(m_Bitmap.Width, m_Bitmap.Height);

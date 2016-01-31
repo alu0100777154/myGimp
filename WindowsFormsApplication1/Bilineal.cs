@@ -70,10 +70,10 @@ namespace myGimp
                     double p = Math.Abs(x - minX);
                     double q = Math.Abs(y - minY);
 
-                    Color pA = m_Bitmap.GetPixel(minX, maxY);// new Color(imagenReal.getRGB(minX, maxY));
-                    Color pB = m_Bitmap.GetPixel(maxX, maxY); //new Color(imagenReal.getRGB(maxX, maxY));
-                    Color pC = m_Bitmap.GetPixel(minX, minY); //new Color(imagenReal.getRGB(minX, minY));
-                    Color pD = m_Bitmap.GetPixel(maxX, minY); //new Color(imagenReal.getRGB(maxX, minY));
+                    Color pA = m_Bitmap.GetPixel(minX, maxY);
+                    Color pB = m_Bitmap.GetPixel(maxX, maxY);
+                    Color pC = m_Bitmap.GetPixel(minX, minY);
+                    Color pD = m_Bitmap.GetPixel(maxX, minY);
 
                     int valor = (int)(((float)pC.R) + ((float)(pD.R - pC.R)) * p + ((float)(pA.R - pC.R)) * q + ((float)(pB.R + pC.R - pA.R - pD.R)) * p * q);
 

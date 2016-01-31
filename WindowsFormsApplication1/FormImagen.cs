@@ -197,76 +197,11 @@ namespace myGimp
                     acum[i] = ahist[i] / (this.Width * this.Height);
 
 
-
-                //    	Cálculo de la tabla de transformación
-                int[] tabla = new int[256];
-
-//                Array<int> tabla = new Array<int>(0);
-
-                float lastDife, auxDif;
-                int indice = 0;
+                
 
 
-                for (int i = 0; i < acum.Count(); i++)
-                {
-                    lastDife = 9999;
-                    for (int j = 0; j < acum.Count(); j++)
-                    {
-                        auxDif = Math.Abs(acumaux[j] - acum[i]);
-                        if (auxDif <= lastDife)
-                        {
-                            lastDife = auxDif;
-                            indice = j;
-                        }
-                    }
-                    //System.out.println("i: " + i);
-                    tabla.SetValue(i,indice);
-                }
 
-
-                /*
-                for (int i = 0; i < hist.Count(); i++)
-                {
-                    nVal = Math.Min(acumaux[i],acum[i]);
-                }
-
-                a = (FormPrincipal)MdiParent;
-
-                a_Bitmap = new Bitmap(m_Bitmap.Width, m_Bitmap.Height);
-
-                for (int i = 0; i < m_Bitmap.Width; i++)
-                {
-                    for (int j = 0; j < m_Bitmap.Height; j++)
-                    {
-                        //int nVal = (int)(m_Bitmap.GetPixel(i, j).B + nbrillo);
-
-                        m_Bitmap.SetPixel(i, j, Color.FromArgb(255, nVal, nVal, nVal));
-                    }
-                }
-                */
-
-             //   image.m_Bitmap.Width = m_Bitmap.Width;
-
-                a_Bitmap = new Bitmap(m_Bitmap.Width, m_Bitmap.Height);
-
-                for (int i = 0; i < m_Bitmap.Width; i++)
-                {
-                    int valor;
-                    Color colorAux;
-                    for (int j = 0; j < m_Bitmap.Height; j++)
-                    {
-                        //Almacenamos el color del píxel
-                        colorAux = m_Bitmap.GetPixel(i,j);
-
-                        valor = tabla[colorAux.R];
-                        colorAux = Color.FromArgb(255,valor, valor, valor);
-                        //Asignamos el nuevo valor al BufferedImage
-                        a_Bitmap.SetPixel(i, j, Color.FromArgb(255, valor, valor, valor));
-
-
-                    }
-                }
-
+               
                 FormImagen image1 = new FormImagen(a_Bitmap, a.lastid);
                 
                 a.Imagenes.Add(image1);

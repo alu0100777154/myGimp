@@ -34,3 +34,5 @@ C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\W
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.FormEcualizar.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.Vecino.resources
 E:\Proyectos\myGimp\WindowsFormsApplication1\obj\Debug\myGimp.Bilineal.resources
+C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.Bilineal.resources
+C:\Users\Guille\documents\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\myGimp.Vecino.resources
