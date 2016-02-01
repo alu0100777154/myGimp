@@ -32,6 +32,9 @@ namespace myGimp
             lastid++;
         }
 
+
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = "myGimp";
@@ -344,6 +347,16 @@ namespace myGimp
             frm.MdiParent = this;
             frm.Show();
         }
+
+        private void rotacionXToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRotar frm = new FormRotar(Imagenes[activeid].m_Bitmap, Imagenes[activeid].hist, activeid);
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+
+
 
 
     }

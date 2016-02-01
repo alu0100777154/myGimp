@@ -55,10 +55,11 @@
             this.rotacion180ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotacion270ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vecinoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bilinealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.rotacionXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,7 +182,8 @@
             this.traspuestaToolStripMenuItem,
             this.rotacion90ToolStripMenuItem,
             this.rotacion180ToolStripMenuItem,
-            this.rotacion270ToolStripMenuItem});
+            this.rotacion270ToolStripMenuItem,
+            this.rotacionXToolStripMenuItem});
             this.transformacionesToolStripMenuItem.Name = "transformacionesToolStripMenuItem";
             this.transformacionesToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
             this.transformacionesToolStripMenuItem.Text = "Transformaciones";
@@ -261,11 +263,6 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // zoomToolStripMenuItem
             // 
             this.zoomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -278,16 +275,28 @@
             // vecinoToolStripMenuItem
             // 
             this.vecinoToolStripMenuItem.Name = "vecinoToolStripMenuItem";
-            this.vecinoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vecinoToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.vecinoToolStripMenuItem.Text = "Vecino";
             this.vecinoToolStripMenuItem.Click += new System.EventHandler(this.vecinoToolStripMenuItem_Click_1);
             // 
             // bilinealToolStripMenuItem
             // 
             this.bilinealToolStripMenuItem.Name = "bilinealToolStripMenuItem";
-            this.bilinealToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bilinealToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.bilinealToolStripMenuItem.Text = "Bilineal";
             this.bilinealToolStripMenuItem.Click += new System.EventHandler(this.bilinealToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // rotacionXToolStripMenuItem
+            // 
+            this.rotacionXToolStripMenuItem.Name = "rotacionXToolStripMenuItem";
+            this.rotacionXToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.rotacionXToolStripMenuItem.Text = "RotacionX";
+            this.rotacionXToolStripMenuItem.Click += new System.EventHandler(this.rotacionXToolStripMenuItem_Click);
             // 
             // FormPrincipal
             // 
@@ -338,6 +347,7 @@
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vecinoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bilinealToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotacionXToolStripMenuItem;
     }
 }
 

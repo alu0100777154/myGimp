@@ -28,8 +28,6 @@ namespace myGimp
             m_Bitmap = (Bitmap)Bitmap.FromFile(FileName, false);
             hist = new int[256];
             ahist = new int[256];
-            acum = new int[256];
-            acumaux = new int[256];
             int tam = m_Bitmap.Width * m_Bitmap.Height;
             pictureBox1.Image = m_Bitmap;
             this.Height = pictureBox1.Image.Height + 40;
@@ -162,6 +160,26 @@ namespace myGimp
         }
 
 
+        private float[] convertToScale(int[] data, int oldMin, int oldMax, int min, int max)
+        {
+            float oldDiff = 0 - oldMin;
+            float oldScale = oldMax - oldMin;
+            float diff = 0 - min;
+            float scale = max - min;
+            float[] ret = new float[data.Length];
+
+            float scaledFromZeroToOne;
+            float value;
+            for (int i = 0; i < data.Length; i++)
+            {
+                scaledFromZeroToOne = (oldDiff + data[i]) / oldScale; // Normalization here [0,1]
+                value = (scaledFromZeroToOne * scale) - diff;
+                ret[i] = value;
+            }
+
+            return ret;
+        }
+
         private void histogramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -174,6 +192,9 @@ namespace myGimp
             if (DialogResult.OK == openFileDialog.ShowDialog())
             {
                 FormImagen image = new FormImagen(openFileDialog.FileName,99); // ID 99
+                this.acum = new float[256];
+                this.acumaux = new float[256];
+                this.resul = new float[256];
 
                 int aux = 0;
                 for (int i = 0; i < m_Bitmap.Width; i++)
@@ -190,18 +211,41 @@ namespace myGimp
                     aux = aux + hist[i];
                 }
 
-                for (int i = 0; i < ahist.Count(); i++)
-                    acumaux[i] = image.ahist[i] / (image.m_Bitmap.Width * image.m_Bitmap.Height);
+                float[] acum = convertToScale(image.ahist, 0, image.ahist.Last(), 0, 1);
 
-                for (int i = 0; i < acum.Count(); i++)
-                    acum[i] = ahist[i] / (this.Width * this.Height);
+                float[] acumaux = convertToScale(ahist, 0, ahist.Last(), 0, 1);
+
+                for (int i = 0; i < 256; i++)
+                {
+                    acum[i] = acumaux[i];
+                }
 
 
+                for (int i = 0; i < m_Bitmap.Width; i++)
+                {
+                    for (int j = 0; j < m_Bitmap.Height; j++)
+                    {
+                        aux = m_Bitmap.GetPixel(i, j).B;
+
+                        a_Bitmap.SetPixel(i, j, Color.FromArgb(255, acum[aux], acum[aux], acum[aux]));
+                        //                        m_Bitmap.SetPixel(i, j,m_Bitmap.GetPixel(j,i));
+
+                    }
+                }
+
+
+/*                int sizeo = image.m_Bitmap.Width * image.m_Bitmap.Height;
+                int size2 = this.Width * this.Height;
+
+                for (int i = 0; i < 256; i++)
+                    this.acumaux[i] = image.ahist[i] / image.ahist.Last();
+
+                for (int i = 0; i < 256; i++)
+                    this.acum[i] = ahist[i] / ahist.Last();
+                */
+                 
                 
-
-
-
-               
+                
                 FormImagen image1 = new FormImagen(a_Bitmap, a.lastid);
                 
                 a.Imagenes.Add(image1);
@@ -213,6 +257,10 @@ namespace myGimp
                 
             }
         }
+
+
+
+      
 
         private void diferenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -226,6 +274,7 @@ namespace myGimp
             if (DialogResult.OK == openFileDialog.ShowDialog())
             {
                 FormImagen image = new FormImagen(openFileDialog.FileName, a.lastid);
+                FormImagen imaged = new FormImagen(openFileDialog.FileName, a.lastid);
 
 
                 for (int i = 0; i < image.m_Bitmap.Width; i++)
@@ -238,12 +287,14 @@ namespace myGimp
                         //                        this.m_Bitmap.GetPixel(i, j).A
                         valor = Math.Abs(image.m_Bitmap.GetPixel(i, j).B - this.m_Bitmap.GetPixel(i, j).B);
 
+                        imaged.m_Bitmap.SetPixel(i, j, Color.FromArgb(Color.Red.A, valor, valor, valor));
+
+
                         if (valor > 0)
                         {
 
                             //Asignamos el nuevo valor 
                             image.m_Bitmap.SetPixel(i, j, Color.FromArgb(Color.Red.A, 255, 0, 0));
-
                         }
                     }
                 }
@@ -254,13 +305,20 @@ namespace myGimp
                 a.Imagenes[a.lastid].Show();
                 a.lastid++;
                 this.Invalidate();
+
+                a.Imagenes.Add(imaged);
+                a.Imagenes[a.lastid].MdiParent = this.MdiParent;
+                a.Imagenes[a.lastid].Show();
+                a.lastid++;
+                this.Invalidate();
             }
         }
 
         public float contraste = 0, brillo = 0, entropia = 0;
         Color[] copia;
         List<int> valores;
-        public int[] hist, ahist, acum, acumaux;
+        public int[] hist, ahist;
+            public float[] acum, acumaux,resul;
         FormPrincipal a;
 
 
@@ -340,6 +398,16 @@ namespace myGimp
             a.activeid = this.id;
             this.Text = id.ToString();
         }
+
+
+
+
+
+
+
+
+
+
 
         
     }
